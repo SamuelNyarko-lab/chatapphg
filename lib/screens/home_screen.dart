@@ -53,12 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 24,
-            ),
-            child: Avatar.small(url: Helpers.randomPictureUrl().toString()),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     right: 24,
+          //   ),
+          //   child: Avatar.small(url: Helpers.randomPictureUrl().toString()),
+          // ),
         ],
         leadingWidth: 54,
         leading: Align(
