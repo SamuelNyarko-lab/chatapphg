@@ -5,6 +5,6 @@ class MessagesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('MessagesPage');
+    return Center(child: const Text('MessagesPage'));
   }
 }
