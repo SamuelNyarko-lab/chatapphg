@@ -5,6 +5,9 @@ import 'package:chatapphg/pages/notifications_page.dart';
 import 'package:chatapphg/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:chatapphg/widgets/widgets.dart';
+
+import '../helpers.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -49,6 +52,22 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 24,
+            ),
+            child: Avatar.small(url: Helpers.randomPictureUrl().toString()),
+          ),
+        ],
+        leadingWidth: 54,
+        leading: Align(
+          alignment: Alignment.centerRight,
+          child: IconBackground(
+            icon: Icons.search,
+            onTap: () {},
+          ),
+        ),
       ),
       body: ValueListenableBuilder(
         valueListenable: pageIndex,
@@ -65,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _BottomNavigationBar extends StatefulWidget {
   const _BottomNavigationBar({
+    // ignore: unused_element
     super.key,
     required this.onItemSelected,
   });
@@ -128,6 +148,7 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
 
 class _NavigationBarItem extends StatelessWidget {
   const _NavigationBarItem({
+    // ignore: unused_element
     super.key,
     required this.label,
     required this.icon,
