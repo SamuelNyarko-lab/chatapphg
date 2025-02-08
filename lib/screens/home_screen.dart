@@ -22,11 +22,34 @@ class _HomeScreenState extends State<HomeScreen> {
     ContactsPage()
   ];
 
+  final titles = const ['Messages', 'Notifications', 'Calls', 'Contacts'];
+
   final ValueNotifier<int> pageIndex = ValueNotifier(0);
+  final ValueNotifier<String> titleIndex = ValueNotifier('Messages');
+  void _onNavigationItemSelected(index) {
+    titleIndex.value = titles[index];
+    pageIndex.value = index;
+  }
+
   //This notifies if value changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: ValueListenableBuilder(
+          valueListenable: titleIndex,
+          builder: (context, value, _) {
+            return Text(
+              titleIndex.value,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            );
+          },
+        ),
+      ),
       body: ValueListenableBuilder(
         valueListenable: pageIndex,
         builder: (BuildContext context, int value, _) {
@@ -34,9 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       bottomNavigationBar: _BottomNavigationBar(
-        onItemSelected: (index) {
-          pageIndex.value = index;
-        },
+        onItemSelected: _onNavigationItemSelected,
       ),
     );
   }
@@ -75,7 +96,7 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
             label: 'Messages',
             icon: CupertinoIcons.bubble_left_bubble_right_fill,
             index: 0,
-            isSelected: (selectedIndex==0),//check if value is selected
+            isSelected: (selectedIndex == 0), //check if value is selected
             onTap: handleItemSelected,
           ),
           _NavigationBarItem(
@@ -83,7 +104,6 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
             icon: CupertinoIcons.bell_solid,
             index: 1,
             isSelected: (selectedIndex == 1),
-
             onTap: handleItemSelected,
           ),
           _NavigationBarItem(
@@ -91,7 +111,6 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
             icon: CupertinoIcons.phone_fill,
             index: 2,
             isSelected: (selectedIndex == 2),
-
             onTap: handleItemSelected,
           ),
           _NavigationBarItem(
@@ -99,7 +118,6 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
             icon: CupertinoIcons.person_2_fill,
             index: 3,
             isSelected: (selectedIndex == 3),
-
             onTap: handleItemSelected,
           ),
         ],
@@ -116,7 +134,6 @@ class _NavigationBarItem extends StatelessWidget {
     required this.index,
     this.isSelected = false,
     required this.onTap,
-
   });
 
   final ValueChanged<int>
@@ -139,20 +156,22 @@ class _NavigationBarItem extends StatelessWidget {
             Icon(
               icon,
               size: 20,
-              color: isSelected ? AppColors.secondary :null,
+              color: isSelected ? AppColors.secondary : null,
             ),
             SizedBox(
               height: 8,
             ),
             Text(
               label,
-              style: isSelected? TextStyle(
-                color: AppColors.secondary,
-                fontWeight: FontWeight.bold,
-                fontSize: 11,
-              ): TextStyle(
+              style: isSelected
+                  ? TextStyle(
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.bold,
                       fontSize: 11,
-                    ) ,
+                    )
+                  : TextStyle(
+                      fontSize: 11,
+                    ),
             ),
           ],
         ),
