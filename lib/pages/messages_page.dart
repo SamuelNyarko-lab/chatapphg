@@ -11,11 +11,23 @@ class MessagesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: _Stories(),
+    return CustomScrollView(
+      //this gives the option to have both horizontal and vertical scroll widgets
+      slivers: [
+        SliverToBoxAdapter(
+          //added this to make the widget a sliver and gives it a fixed size
+          child: _Stories(),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(childCount: 10,
+              _delegate),
+        )
+      ],
     );
   }
+  Widget _delegate(BuildContext context, int index) {
+            return Text('data');
+          }
 }
 
 class _Stories extends StatelessWidget {
@@ -31,7 +43,11 @@ class _Stories extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 16.0,),
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                top: 8.0,
+                bottom: 16.0,
+              ),
               child: Text(
                 'Stories',
                 style: TextStyle(
@@ -43,7 +59,7 @@ class _Stories extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 7,
+                  itemCount: 7,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     final faker = Faker();
