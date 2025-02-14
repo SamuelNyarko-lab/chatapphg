@@ -2,6 +2,7 @@ import 'package:chatapphg/helpers.dart';
 import 'package:chatapphg/theme.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 import '../models/models.dart';
 import '../widgets/widgets.dart';
@@ -19,15 +20,114 @@ class MessagesPage extends StatelessWidget {
           child: _Stories(),
         ),
         SliverList(
-          delegate: SliverChildBuilderDelegate(childCount: 10,
-              _delegate),
+          delegate: SliverChildBuilderDelegate(childCount: 10, _delegate),
         )
       ],
     );
   }
+
   Widget _delegate(BuildContext context, int index) {
-            return Text('data');
-          }
+    final Faker faker = Faker();
+    final date = Helpers.randomDate();
+    return MessageTile(
+      messageData: MessageData(
+        senderName: faker.person.name(),
+        message: faker.lorem.sentence(),
+        messageDate: date,
+        dateMessage: Jiffy.parseFromDateTime(date).fromNow(),
+        profilePicture: Helpers.randomPictureUrl(),
+      ),
+    );
+  }
+}
+
+class MessageTile extends StatelessWidget {
+  const MessageTile({super.key, required this.messageData});
+  final MessageData messageData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Avatar.medium(
+            url: messageData.profilePicture,
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 6.0,
+                ),
+                child: Text(
+                  messageData.senderName,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    letterSpacing: 0.2,
+                    wordSpacing: 1.5,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+                child: Text(
+                  messageData.message,
+                  style: TextStyle(
+                    color: AppColors.textFaded,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            right: 20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                messageData.dateMessage.toUpperCase(),
+                style: TextStyle(
+                  color: AppColors.textFaded,
+                  letterSpacing: -0.2,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 11,
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Container(
+                height: 18,
+                width: 18,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.secondary,
+                ),
+                child: Center(
+                  child: Text(
+                    '1',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: AppColors.textLigth,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
 }
 
 class _Stories extends StatelessWidget {
@@ -59,7 +159,7 @@ class _Stories extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: 7,
+                  itemCount: 1,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     final faker = Faker();

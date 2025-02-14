@@ -60,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Avatar.small(url: Helpers.randomPictureUrl().toString()),
           ),
         ],
+        iconTheme: Theme.of(context).iconTheme,
         leadingWidth: 54,
         leading: Align(
           alignment: Alignment.centerRight,

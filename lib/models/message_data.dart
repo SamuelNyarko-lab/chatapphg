@@ -1,3 +1,6 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class MessageData {
   final String senderName;
   final String message;
@@ -5,7 +8,7 @@ class MessageData {
   final String dateMessage;
   final String profilePicture;
 
-  MessageData({
+ const MessageData({
     required this.senderName,
     required this.message,
     required this.messageDate,
