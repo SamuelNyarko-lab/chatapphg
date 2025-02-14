@@ -10,7 +10,7 @@ import 'package:chatapphg/widgets/widgets.dart';
 import '../helpers.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -107,41 +107,54 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
   //passing index up to BottomNavigationBar
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: true,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _NavigationBarItem(
-            label: 'Messages',
-            icon: CupertinoIcons.bubble_left_bubble_right_fill,
-            index: 0,
-            isSelected: (selectedIndex == 0), //check if value is selected
-            onTap: handleItemSelected,
+    final brightness = Theme.of(context).brightness;
+
+    return Card(
+      color: (brightness == Brightness.light) ? Colors.transparent : null,
+      margin: EdgeInsets.all(0),
+      elevation: 0,
+      child: SafeArea(
+        top: false,
+        bottom: true,
+        child: Padding(
+padding: const EdgeInsets.only(
+            left: 8.0,
+            top: 16.0,
+            bottom: 8.0,
+          ),          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _NavigationBarItem(
+                label: 'Messages',
+                icon: CupertinoIcons.bubble_left_bubble_right_fill,
+                index: 0,
+                isSelected: (selectedIndex == 0), //check if value is selected
+                onTap: handleItemSelected,
+              ),
+              _NavigationBarItem(
+                label: 'Notifications',
+                icon: CupertinoIcons.bell_solid,
+                index: 1,
+                isSelected: (selectedIndex == 1),
+                onTap: handleItemSelected,
+              ),
+              _NavigationBarItem(
+                label: 'Calls',
+                icon: CupertinoIcons.phone_fill,
+                index: 2,
+                isSelected: (selectedIndex == 2),
+                onTap: handleItemSelected,
+              ),
+              _NavigationBarItem(
+                label: 'Contacts',
+                icon: CupertinoIcons.person_2_fill,
+                index: 3,
+                isSelected: (selectedIndex == 3),
+                onTap: handleItemSelected,
+              ),
+            ],
           ),
-          _NavigationBarItem(
-            label: 'Notifications',
-            icon: CupertinoIcons.bell_solid,
-            index: 1,
-            isSelected: (selectedIndex == 1),
-            onTap: handleItemSelected,
-          ),
-          _NavigationBarItem(
-            label: 'Calls',
-            icon: CupertinoIcons.phone_fill,
-            index: 2,
-            isSelected: (selectedIndex == 2),
-            onTap: handleItemSelected,
-          ),
-          _NavigationBarItem(
-            label: 'Contacts',
-            icon: CupertinoIcons.person_2_fill,
-            index: 3,
-            isSelected: (selectedIndex == 3),
-            onTap: handleItemSelected,
-          ),
-        ],
+        ),
       ),
     );
   }
