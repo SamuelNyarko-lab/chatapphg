@@ -117,11 +117,12 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
         top: false,
         bottom: true,
         child: Padding(
-padding: const EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 8.0,
             top: 16.0,
             bottom: 8.0,
-          ),          child: Row(
+          ),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _NavigationBarItem(
@@ -184,7 +185,7 @@ class _NavigationBarItem extends StatelessWidget {
           HitTestBehavior.opaque, //solves click beside icon that doesn't work
       onTap: () => onTap(index),
       child: SizedBox(
-        height: 70,
+        height: 50,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
