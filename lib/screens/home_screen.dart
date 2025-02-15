@@ -140,12 +140,15 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
                 isSelected: (selectedIndex == 1),
                 onTap: handleItemSelected,
               ),
-              GlowingActionButton(
-                color: AppColors.secondary,
-                icon: CupertinoIcons.add,
-                onPressed: () {
-                  print('add');
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: GlowingActionButton(
+                  color: AppColors.secondary,
+                  icon: CupertinoIcons.add,
+                  onPressed: () {
+                    print('add');
+                  },
+                ),
               ),
               _NavigationBarItem(
                 label: 'Calls',
@@ -193,7 +196,7 @@ class _NavigationBarItem extends StatelessWidget {
           HitTestBehavior.opaque, //solves click beside icon that doesn't work
       onTap: () => onTap(index),
       child: SizedBox(
-        height: 50,
+        width: 70,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
