@@ -3,6 +3,7 @@ import 'package:chatapphg/pages/contacts_page.dart';
 import 'package:chatapphg/pages/messages_page.dart';
 import 'package:chatapphg/pages/notifications_page.dart';
 import 'package:chatapphg/theme.dart';
+import 'package:chatapphg/widgets/glowing_action_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapphg/widgets/widgets.dart';
@@ -138,6 +139,13 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
                 index: 1,
                 isSelected: (selectedIndex == 1),
                 onTap: handleItemSelected,
+              ),
+              GlowingActionButton(
+                color: AppColors.secondary,
+                icon: CupertinoIcons.add,
+                onPressed: () {
+                  print('add');
+                },
               ),
               _NavigationBarItem(
                 label: 'Calls',
