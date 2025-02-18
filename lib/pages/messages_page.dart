@@ -1,4 +1,5 @@
 import 'package:chatapphg/helpers.dart';
+import 'package:chatapphg/screens/screens.dart';
 import 'package:chatapphg/theme.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,8 @@ class MessageTile extends StatelessWidget {
     return InkWell(
       onTap: () {
         //This also adds the splash effect
+
+        Navigator.push(context, ChatScreen.route(messageData));
       },
       child: Container(
         height: 100,
