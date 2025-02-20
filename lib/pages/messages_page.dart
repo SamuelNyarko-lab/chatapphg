@@ -184,7 +184,7 @@ class _Stories extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: 1,
+                  itemCount: 5,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     final faker = Faker();
